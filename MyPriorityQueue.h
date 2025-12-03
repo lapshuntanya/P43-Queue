@@ -29,7 +29,7 @@ namespace myQueue {
                     Queue<U>::head->prev = el;
                     Queue<U>::head = el;
                 }else if (p == Queue<U>::current) {
-                    Queue<U>::push_back(el);
+                    Queue<U>::push_back(value);
                 }
                 else {
                     Node<U>*p2 = p->next;
