@@ -35,13 +35,49 @@ namespace myQueue {
         }
         ~Queue() { ... }//реалізація
 
-        bool isEmpty()const { ... }//реалізація
-        U first()const { ... }//реалізація
+        bool isEmpty()const {
+            return head == nullptr || current == nullptr;
+        }
+        U first()const {
+            if (isEmpty()) throw "Queue is empty!";
+            return head->info;
+        }
 
-        void push_back(U value) { ... }//реалізація
-        void pop_front() { ... }//реалізація
+        void push_back(U value) {
+            Node<U>* el = new Node<U>(value);
 
-        void show()const { ... }//реалізація
+            if (isEmpty()) {
+                head = current = el;
+            }else {
+                current->next = el;
+                el->prev = current;
+                current = el;
+            }
+        }
+        void pop_front() {
+            if (!isEmpty()) {
+                if (head == current) {
+                    delete head;
+                    head = current = nullptr;
+                }else {
+                    head = head->next;
+                    delete head->prev;
+                    head->prev = nullptr;
+                }
+            }
+        }
+
+        void show()const {
+            if (isEmpty()) cout << "Queue is empty!\n";
+            else {
+                Node<U> * p = head;
+                while (p!=nullptr) {
+                    cout << p->info << " ";
+                    p = p->next;
+                }
+                cout << endl;
+            }
+        }
     };
 }
 #endif //P43_QUEUE_MYQUEUE_H
