@@ -33,7 +33,11 @@ namespace myQueue {
         Queue() {
             head = current = nullptr;
         }
-        ~Queue() { ... }//реалізація
+        ~Queue() {
+            while (!isEmpty()) {
+                pop_front();
+            }
+        }
 
         bool isEmpty()const {
             return head == nullptr || current == nullptr;
